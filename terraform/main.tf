@@ -84,7 +84,7 @@ resource "aws_security_group" "mysql_ec2_sg" {
   }
 }
 
-# Reference the existing SSH Key Pair
+# Reference the existing SSH Key Pair (ensure it's available in your AWS account)
 data "aws_key_pair" "mysql_key" {
   key_name = "jenkins"  # Replace with your actual key name in AWS
 }
@@ -114,7 +114,7 @@ resource "aws_instance" "mysql_instance" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file("<path_to_private_key>")  # Path to your private key file
+      private_key = file(var.private_key_path)  # Use variable for private key path
       host        = self.public_ip
     }
   }
@@ -126,7 +126,7 @@ resource "aws_instance" "mysql_instance" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file("<path_to_private_key>")  # Path to your private key file
+      private_key = file(var.private_key_path)  # Use variable for private key path
       host        = self.public_ip
     }
   }
@@ -135,4 +135,10 @@ resource "aws_instance" "mysql_instance" {
 # Output the Public IP of EC2
 output "mysql_instance_public_ip" {
   value = aws_instance.mysql_instance.public_ip
+}
+
+# Define input variable for private key path
+variable "private_key_path" {
+  description = "Path to the private key for SSH access"
+  type        = string
 }
