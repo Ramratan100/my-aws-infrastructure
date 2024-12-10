@@ -116,7 +116,7 @@ resource "aws_instance" "mysql_instance" {
     connection {
       type        = "ssh"
       user        = "ubuntu"
-      private_key = file(/home/ubuntu/jenkins.pem)  # Use variable for private key path
+      private_key = "/home/ubuntu/jenkins.pem"  # Use variable for private key path
       host        = self.public_ip
     }
   }
