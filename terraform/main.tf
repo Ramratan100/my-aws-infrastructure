@@ -138,9 +138,3 @@ resource "aws_instance" "mysql_instance" {
 output "mysql_instance_public_ip" {
   value = aws_instance.mysql_instance.public_ip
 }
-
-# Define input variable for private key path
-variable "private_key_path" {
-  description = "Path to the private key for SSH access"
-  type        = string
-}
