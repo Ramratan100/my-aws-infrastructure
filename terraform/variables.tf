@@ -16,3 +16,9 @@ variable "aws_default_region" {
   type        = string
   default     = "us-east-1"  # You can specify the default region or make it an optional input
 }
+
+variable "private_key_path" {
+  description = "Path to the private key for SSH access"
+  type        = string
+  default     = "/home/ubuntu/jenkins.pem"  # Ensure the correct absolute path
+}
